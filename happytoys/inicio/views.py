@@ -11,3 +11,23 @@ def inicio(request):
 def descripcion(request):
     print (request.user.username)
     return render(request,"descripcion.html")
+
+def login(request):
+    if request.method == "POST":
+        if ("user" in request.POST.keys()) and ("password" in request.POST.keys()):
+            user = auth.authenticate(user = request.POST['user'] , password = request.POST['password'])
+            if user is not None and user.is_active:
+                auth.login(request,user)
+                return redirect("/login/logueado/")
+            else:
+                contexto = {"error" : "error"}
+                return render(request,"login.html",contexto)
+
+        else:
+            contexto = {"error" : "error"}
+            return render(request,"login.html",contexto)
+    return render(request,"login.html")
+
+@login_required(login_url = '/login')
+def vista_logueado(request):
+    return render(request,"logueado.html")

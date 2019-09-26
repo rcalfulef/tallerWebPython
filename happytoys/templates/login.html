@@ -1,0 +1,26 @@
+{% extends 'plantilla.html' %}
+{% block contenido %}
+<div class="container">
+    <div class="row">
+    <form method="POST">
+        <fieldset>
+            <legend>Ingreso de usuario</legend>
+        
+            <div class="form-group">
+            <label for="exampleInputEmail1">Usuario</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese usuario" name="user">
+            </div>
+            <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+            </div>
+            
+            
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+</form>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -4,5 +4,6 @@ from inicio.views import *
 urlpatterns = [
     url(r"^$",inicio),
     url(r'^descripcion/$',descripcion),
+    url(r'^login/$',login),
      
 ]
