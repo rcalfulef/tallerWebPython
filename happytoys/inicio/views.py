@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import time
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,7 +17,9 @@ def descripcion(request):
 def login(request):
     if request.method == "POST":
         if ("user" in request.POST.keys()) and ("password" in request.POST.keys()):
-            user = auth.authenticate(user = request.POST['user'] , password = request.POST['password'])
+            user = auth.authenticate(username = request.POST['user'] , password = request.POST['password'])
+            print(request.POST['user'])
+            print(user)
             if user is not None and user.is_active:
                 auth.login(request,user)
                 return redirect("/login/logueado/")
@@ -28,6 +32,10 @@ def login(request):
             return render(request,"login.html",contexto)
     return render(request,"login.html")
 
-@login_required(login_url = '/login')
+@login_required(login_url='/login')
 def vista_logueado(request):
+    if request.method == 'POST':
+        if ("cerrar" in request.POST.keys()):
+            auth.logout(request)
+            return redirect("/login/")
     return render(request,"logueado.html")
