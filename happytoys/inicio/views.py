@@ -3,7 +3,7 @@ import time
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import *
-
+from .forms import *
 # Create your views here.
 
 def inicio(request):
@@ -66,4 +66,23 @@ def vista_logueado(request):
             auth.logout(request)
             return redirect("/")
     return render(request,"logueado.html")
+
+def newJuguete(request):
+    if request.method == "POST":
+        form = JugueteForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        if ("nombre" in request.POST.keys()) and ("precio" in request.POST.keys()) and ("cantidad" in request.POST.keys()) and ("descripcion" in request.POST.keys()):
+            juguete=Juguete()
+            juguete.nombre=request.POST["nombre"]
+            juguete.precio=request.POST["precio"]
+            juguete.cantidad=request.POST["cantidad"]
+            juguete.descripcion=request.POST["descripcion"]
+            juguete.save()
+        if ("cerrar" in request.POST.keys()):
+            auth.logout(request)
+            return redirect("/login/")
+    form = JugueteForm(request.POST or None)
+    contexto = {"usuario":request.user,"form":form}
+    return render(request,"newJuguete.html",contexto)
 
