@@ -1,14 +1,32 @@
 {% extends 'plantilla.html' %}
 {% block contenido %}
-	<div class="row">
-		<div class= "col-md-6">
-			<center><h2 style="color:#428bca" > hola, hoy es {{fecha}} <h1></center>	
-		</div>
 
-		<div class= "col-md-6">
-		<center><img src='media/imagen.jpg'></center>
-		</div>
-		
-	</div>
+	
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1-12">
+        {% if user.is_authenticated %}
+          <h3>
+            Bienvenido 
+            <small class="text-muted">{{user.username}}</small>
+          </h3>
+        {% endif %}
+        
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-1-12">
+          <h2 style="color:#428bca" > hoy es {{fecha}} <h1>
+        </div>
+        <div class="col-xs-1-12">
+          <img src='media/imagen.jpg'>
+        </div>
+      </div>
+    </div>
+  
+ 
+
+
 	
 {% endblock contenido %}
