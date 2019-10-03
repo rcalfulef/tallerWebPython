@@ -2,12 +2,17 @@ from django.shortcuts import render, redirect
 import time
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 # Create your views here.
 
 def inicio(request):
     print (request.user.username)
     context  = {"usuario" : "Andres Calfulef","fecha": time.strftime("%d/%m/%y")}
+    if request.method == "POST":
+        if "search" in request.POST.keys():
+            resultado = Juguete.objects.filter(nombre__contains = request.POST['search'])
+            context["resultado"]=resultado
     return render(request,"inicio.html",context)
 
 def descripcion(request):
