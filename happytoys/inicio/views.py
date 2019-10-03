@@ -9,15 +9,19 @@ from .models import *
 def inicio(request):
     print (request.user.username)
     context  = {"usuario" : "Andres Calfulef","fecha": time.strftime("%d/%m/%y")}
-    if request.method == "POST":
-        if "search" in request.POST.keys():
-            resultado = Juguete.objects.filter(nombre__contains = request.POST['search'])
-            context["resultado"]=resultado
     return render(request,"inicio.html",context)
 
 def descripcion(request):
     print (request.user.username)
     return render(request,"descripcion.html")
+
+def buscador(request):
+    context = {}
+    if request.method == "POST":    
+        if "search" in request.POST.keys():
+            resultado = Juguete.objects.filter(nombre__contains = request.POST['search'])
+            context = {'resultado':resultado}
+    return render(request,"buscador.html",context)
 
 def login(request):
     if request.method == "POST":
