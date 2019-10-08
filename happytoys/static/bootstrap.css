@@ -4847,7 +4847,12 @@ input[type="button"].btn-block {
 }
 
 .card-img-top {
-  width: 100%;
+  /*width: 100%;
+  height: 100%;*/
+  height: 20vw;
+  object-fit: cover;
+  /*background-size: auto;
+  background-position: center;*/
 }
 
 .card-img-bottom {
