@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Juguete)
 admin.site.register(Boleta)
+admin.site.register(Image)

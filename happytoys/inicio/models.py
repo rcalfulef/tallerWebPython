@@ -17,3 +17,10 @@ class Boleta(models.Model):
     juguete = models.ForeignKey(Juguete,on_delete=models.CASCADE,blank = False,null = True)
     def __str__(self):
         return u'%s' %(self.fecha)
+
+class Image(models.Model):
+    name = models.CharField(max_length=500)
+    imageFile = models.FileField(upload_to='images/', null = True, verbose_name= "")
+    
+    def __str__(self):
+        return self.name + ": " + str(self.imageFile)

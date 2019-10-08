@@ -86,3 +86,18 @@ def newJuguete(request):
     contexto = {"usuario":request.user,"form":form}
     return render(request,"newJuguete.html",contexto)
 
+
+
+def showImage(request):
+    lastImage = Image.objects.last()
+    print(lastImage)
+    imageFile = lastImage.imageFile
+    print(imageFile)
+    form = ImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+    
+    context = {'imageFile': imageFile,
+               'form': form}
+    
+    return render(request,'images.html',context)

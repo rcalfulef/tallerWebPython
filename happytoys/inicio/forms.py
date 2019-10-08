@@ -14,3 +14,7 @@ class JugueteForm(forms.ModelForm):
         self.fields["descripcion"].widget.attrs.update({'class':'form-control','placeholder':'Ingrese alguna descripción'})
 
 
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model= Image
+        fields= ("name", "imageFile")
