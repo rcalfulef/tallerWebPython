@@ -86,6 +86,24 @@ def newJuguete(request):
     contexto = {"usuario":request.user,"form":form}
     return render(request,"newJuguete.html",contexto)
 
+def newToy(request):
+    if request.method == "POST":
+        form = JugueteForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            form.save()
+        if ("nombre" in request.POST.keys()) and ("precio" in request.POST.keys()) and ("cantidad" in request.POST.keys()) and ("descripcion" in request.POST.keys()  and ("imageFile" in request.POST.keys())):
+            juguete=Juguete()
+            juguete.nombre      =request.POST["nombre"]
+            juguete.precio      =request.POST["precio"]
+            juguete.cantidad    =request.POST["cantidad"]
+            juguete.descripcion =request.POST["descripcion"]
+            juguete.imageFile   =request.POST["imageFile"]
+            juguete.save()
+    else:
+        form = JugueteForm(request.POST or None)
+    contexto = {"usuario":request.user,"form":form}
+    return render(request,"newToy.html",contexto)
+
 
 
 def showImage(request):
@@ -94,8 +112,9 @@ def showImage(request):
     imageFile = lastImage.imageFile
     print(imageFile)
     form = ImageForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
+  
+    contexto = {"usuario":request.user,"form":form}
+    return render(request,"newJuguete.html",contexto)
     
     context = {'imageFile': imageFile,
                'form': form}
