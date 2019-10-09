@@ -4,6 +4,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from cart.forms import CartAddJugueteForm
+from django.shortcuts import render, redirect, get_object_or_404
+
 # Create your views here.
 
 def inicio(request):
@@ -35,6 +38,16 @@ def juguetes(request):
         context = {'resultado': resultado}
 
     return render(request,"juguetes.html",context)
+
+def juguete_detail(request,juguete_id):
+    juguete = get_object_or_404(Juguete, id=juguete_id)
+    cart_juguete_form = CartAddJugueteForm()
+    context = {
+        'juguete': juguete,
+        'cart_juguete_form': cart_juguete_form
+    }
+    return render(request, 'detail.html', context)
+
 
 
 def login(request):
