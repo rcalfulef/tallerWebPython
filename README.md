@@ -1,2 +1,0 @@
-# tallerWebPython
-Proyecto juguetes
