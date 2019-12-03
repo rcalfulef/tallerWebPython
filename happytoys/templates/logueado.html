@@ -1,0 +1,10 @@
+{% extends 'plantilla.html' %}
+{% block contenido %}
+<p> Logueado exitoso! </p>
+
+<form method="POST" role="form" action=".">
+    {% csrf_token %}
+    <input type="hidden" value="logout" name="cerrar">
+    <button class="btn btn-info  text-uppercase waves-effect waves-light" type="submit">Cerrar la sesión</button>
+</form>
+{% endblock %}
