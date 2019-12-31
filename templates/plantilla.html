@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +28,13 @@
         <a class="nav-link" href="/juguetes">Nuestros juguetes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/juguetes/agregar">Agregar nuevos juguetes</a>
+        <a class="nav-link" href="{% url 'inicio:newToy' %}">Agregar nuevos juguetes</a>
       </li>
     </ul>
 
     {% if user.is_authenticated %}
     Hola {{user.username}} 
-    <a class="btn btn-secondary my-2 my-sm-0" href="{% url 'logout' %}">Cerrar sesion</a>
+    <a class="btn btn-secondary my-2 my-sm-0" href="{% url 'inicio:logout' %}">Cerrar sesion</a>
      
     {% else %}
       <a class="btn btn-secondary my-2 my-sm-0" href="/login">Iniciar sesion</a>

@@ -3,10 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Juguete(models.Model):
-    nombre = models.CharField(max_length = 100,blank = False, null = False,verbose_name = "Nombre juguete")
-    precio = models.IntegerField(blank = True,null = True,verbose_name = "Precio juguete")
-    cantidad = models.IntegerField(blank = True,null = True,verbose_name = "Cantidad juguete")
-    descripcion =  models.CharField(max_length = 500,blank = False, null =  False,verbose_name = "Descripcion")
+    nombre      = models.CharField(max_length = 100,blank = False, null = False,verbose_name = "Nombre juguete")
+    precio      = models.IntegerField(blank = True,null = True,verbose_name = "Precio juguete")
+    cantidad    = models.IntegerField(blank = True,null = True,verbose_name = "Cantidad juguete")
+    descripcion = models.CharField(max_length = 500,blank = True, null =  True,verbose_name = "Descripcion")
+    imageFile   = models.FileField(upload_to='images/',blank = True, null = True, verbose_name= "Imagen")    
+    
+    
     def __str__(self):
         return u'%s' %(self.nombre)
     
@@ -24,3 +27,4 @@ class Image(models.Model):
     
     def __str__(self):
         return self.name + ": " + str(self.imageFile)
+    
